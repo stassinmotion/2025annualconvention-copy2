@@ -1,0 +1,563 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audio+Wide&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 30% 7%; /* deep blue-black */
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 14% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 14% 16%;
+
+    --primary: 214 90% 31%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5.9% 10%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 350 87% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 214 90% 31%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 214 90% 31%;
+    --sidebar-primary: 214 90% 31%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 214 90% 31%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: linear-gradient(180deg, #0a0a23 0%, #10101a 80%, #181a2a 100%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .glass-panel {
+    @apply bg-white/60 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+  
+  .racing-headline {
+    @apply font-racing text-transparent bg-clip-text bg-gradient-to-r from-racing-red via-racing-blue to-racing-red animate-gradient-x;
+    text-shadow: 0 2px 10px rgba(226, 26, 44, 0.3);
+  }
+
+  .checkered-flag-bg {
+    /* Checkered pattern removed for clean background */
+    background: none !important;
+  }
+
+  .racing-stripe {
+    @apply relative;
+  }
+
+  .racing-stripe::before {
+    content: "";
+    @apply absolute left-0 top-0 h-full w-2 bg-racing-red;
+  }
+
+  .nav-link {
+    @apply relative px-2 py-1 text-foreground hover:text-racing-red transition-colors duration-200 outline-none;
+  }
+
+  .nav-link::after {
+    content: "";
+    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-racing-red transition-all duration-300 ease-in-out;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .nav-link.active {
+    @apply text-racing-red;
+  }
+
+  .nav-link.active::after {
+    @apply w-full;
+  }
+  
+  .btn-primary {
+    @apply bg-racing-blue text-white font-medium px-4 py-2 rounded shadow-md hover:shadow-lg transition-all duration-200 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+  }
+  
+  .btn-accent {
+    @apply bg-racing-red text-white font-medium px-4 py-2 rounded shadow-md hover:shadow-lg transition-all duration-200 ease-in-out hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50;
+  }
+
+  /* Car Dashboard UI */
+  .dashboard-card {
+    @apply border-0 rounded-lg overflow-hidden transform transition-all duration-300;
+  }
+
+  .dashboard-card-hover {
+    @apply shadow-xl scale-[1.01];
+  }
+
+  .dashboard-background {
+    @apply bg-racing-black bg-opacity-90 text-white;
+    background-image: linear-gradient(to bottom, rgba(20, 20, 25, 0.95), rgba(15, 15, 20, 0.95));
+  }
+
+  .dashboard-expanded-background {
+    @apply bg-gray-900 bg-opacity-95 text-white;
+  }
+
+  .dashboard-empty-card {
+    @apply bg-racing-black bg-opacity-90 rounded-lg border border-gray-800;
+  }
+
+  .dashboard-display {
+    @apply bg-gray-800 px-3 py-2 rounded-md border border-gray-700;
+  }
+
+  .dashboard-sub-display {
+    @apply bg-gray-800 bg-opacity-50 px-3 py-2 rounded-md border border-gray-700 border-opacity-50;
+  }
+
+  .dashboard-info-line {
+    @apply flex items-center space-x-2 px-3 py-1;
+  }
+
+  .dashboard-gauge {
+    @apply rounded-md;
+  }
+
+  .gauge-label {
+    @apply text-xs text-racing-silver mb-1 uppercase font-bold tracking-wider;
+  }
+
+  .gauge-container {
+    @apply flex items-center space-x-2;
+  }
+
+  .gauge-icon {
+    @apply animate-pulse;
+  }
+
+  .gauge-progress {
+    @apply h-2 bg-gray-700;
+  }
+
+  .gauge-progress > div {
+    @apply bg-racing-red;
+  }
+
+  .dashboard-control {
+    @apply rounded-md mb-1;
+  }
+
+  .dashboard-button {
+    @apply border-2 shadow-inner transition-all duration-200;
+  }
+
+  .dashboard-control-button {
+    @apply bg-gray-800 hover:bg-gray-700 border border-gray-700;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Countdown Timer Specific Styles */
+  .shadow-glow {
+    box-shadow: 0 0 8px 2px rgba(226, 26, 44, 0.6);
+  }
+
+  /* Racetrack Timeline */
+  .racetrack-timeline {
+    @apply relative h-full w-4 absolute left-6 top-0 bottom-0 z-0;
+    background: repeating-linear-gradient(
+      to bottom,
+      #333 0px,
+      #333 20px,
+      #555 20px,
+      #555 40px
+    );
+  }
+
+  .racetrack-event-container {
+    @apply relative flex items-center z-10 ml-16;
+  }
+
+  .track-marker {
+    @apply absolute -left-12 w-8 h-8 rounded-full border-4 border-racing-red bg-racing-black flex items-center justify-center;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  }
+
+  .start-flag, .finish-flag {
+    @apply absolute -left-3 z-20 flex flex-col items-center;
+  }
+
+  .start-flag {
+    @apply top-0;
+  }
+
+  .finish-flag {
+    @apply bottom-0;
+  }
+
+  .start-flag span, .finish-flag span {
+    @apply text-xs font-bold text-racing-red mt-1;
+  }
+  
+  /* Additional Racing Components */
+  .racing-card {
+    @apply bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg relative;
+  }
+  
+  .racing-card-accent {
+    @apply absolute top-0 left-0 bottom-0 w-1.5;
+  }
+  
+  .racing-stripe-horizontal {
+    @apply relative bg-gradient-to-r from-racing-red to-racing-blue h-1;
+  }
+  
+  .racing-button {
+    @apply relative overflow-hidden inline-flex items-center justify-center px-4 py-2 bg-racing-red text-white font-medium rounded shadow-md transition-all duration-200;
+  }
+  
+  .racing-button::after {
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full;
+    transition: transform 0.6s ease;
+  }
+  
+  .racing-button:hover::after {
+    @apply translate-x-full;
+  }
+
+  .footer-lighting-effect {
+    background: radial-gradient(ellipse at center bottom, rgba(59,130,246,0.22) 0%, rgba(10,10,35,0.95) 80%);
+    animation: footerGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes footerGlow {
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 1; }
+  }
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes shine {
+  from {
+    mask-position: -100% 0;
+  }
+  to {
+    mask-position: 200% 0;
+  }
+}
+
+@keyframes race-across {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes checkered-flag {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Page transition animations */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Particle animation container */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* New animation classes */
+.animate-checkered-flag {
+  animation: checkered-flag 2s linear infinite;
+}
+
+.animate-race {
+  animation: race-across 3s ease-in-out;
+}
+
+.animate-shine {
+  animation: shine 2s infinite linear;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+/* Glitch effect for Rubik Glitch font headline */
+.glitch {
+  position: relative;
+  color: #E21A2C;
+  font-family: 'Rubik Glitch', 'Inter', sans-serif;
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #fff;
+  z-index: 1;
+  pointer-events: none;
+}
+.glitch::before {
+  animation: glitchTop 1.2s infinite linear alternate-reverse;
+  top: -2px;
+  text-shadow: 2px 0 #00ffe7;
+}
+.glitch::after {
+  animation: glitchBottom 1.2s infinite linear alternate-reverse;
+  top: 2px;
+  text-shadow: -2px 0 #ff00c8;
+}
+@keyframes glitchTop {
+  0% { clip-path: inset(0 0 80% 0); }
+  20% { clip-path: inset(0 0 60% 0); }
+  40% { clip-path: inset(0 0 40% 0); }
+  60% { clip-path: inset(0 0 20% 0); }
+  80% { clip-path: inset(0 0 60% 0); }
+  100% { clip-path: inset(0 0 80% 0); }
+}
+@keyframes glitchBottom {
+  0% { clip-path: inset(80% 0 0 0); }
+  20% { clip-path: inset(60% 0 0 0); }
+  40% { clip-path: inset(40% 0 0 0); }
+  60% { clip-path: inset(20% 0 0 0); }
+  80% { clip-path: inset(60% 0 0 0); }
+  100% { clip-path: inset(80% 0 0 0); }
+}
+
+@keyframes flyin-glitch {
+  0% {
+    filter: none;
+    transform: translateY(40px) scale(1) skewX(0deg);
+    opacity: 0;
+  }
+  10% {
+    filter: blur(1px) brightness(1.5);
+    transform: translateY(-10px) scale(1.05) skewX(8deg);
+  }
+  20% {
+    filter: none;
+    transform: translateY(0) scale(1) skewX(-4deg);
+  }
+  30% {
+    filter: blur(1px) brightness(1.2);
+    transform: translateY(0) scale(1.02) skewX(4deg);
+  }
+  40% {
+    filter: none;
+    transform: translateY(0) scale(1) skewX(0deg);
+  }
+  100% {
+    filter: none;
+    transform: translateY(0) scale(1) skewX(0deg);
+    opacity: 1;
+  }
+}
+
+.glitch-flyin {
+  animation: flyin-glitch 0.9s cubic-bezier(0.4,0,0.2,1) both;
+  display: inline-block;
+}
+
+@keyframes noise {
+  0% { clip-path: inset(40% 0 61% 0); }
+  20% { clip-path: inset(92% 0 1% 0); }
+  40% { clip-path: inset(43% 0 1% 0); }
+  60% { clip-path: inset(25% 0 58% 0); }
+  80% { clip-path: inset(54% 0 7% 0); }
+  100% { clip-path: inset(58% 0 43% 0); }
+}
+.glitching {
+  animation: jerk 0.1s linear infinite;
+  position: relative;
+}
+.glitching:before, .glitching:after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+}
+.glitching:before {
+  left: -2px;
+  color: rgba(255,0,0,0.7);
+  animation: noise 0.2s linear infinite alternate-reverse;
+}
+.glitching:after {
+  left: 2px;
+  color: rgba(0,0,255,0.7);
+  animation: noise 0.5s linear infinite;
+}
+@keyframes jerk {
+  50% { transform: translateX(-1px); }
+  51% { transform: translateX(1px); }
+}
+
+/* Retro blinds/blink effect */
+@keyframes blinds-blink {
+  0%, 100% { opacity: 1; mask-image: none; }
+  10% { opacity: 0.2; mask-image: repeating-linear-gradient(
+    to bottom,
+    black 0%,
+    black 8%,
+    transparent 12%,
+    transparent 20%
+  ); }
+  20% { opacity: 1; mask-image: none; }
+  30% { opacity: 0.2; mask-image: repeating-linear-gradient(
+    to bottom,
+    black 0%,
+    black 12%,
+    transparent 16%,
+    transparent 28%
+  ); }
+  40% { opacity: 1; mask-image: none; }
+  50% { opacity: 0.2; mask-image: repeating-linear-gradient(
+    to bottom,
+    black 0%,
+    black 10%,
+    transparent 14%,
+    transparent 24%
+  ); }
+  60%, 90% { opacity: 1; mask-image: none; }
+}
+
+.blinds-blink {
+  animation: blinds-blink 1.2s steps(1, end) infinite;
+  /* fallback for browsers without mask-image */
+  -webkit-animation: blinds-blink 1.2s steps(1, end) infinite;
+  /* For Safari/Webkit */
+  -webkit-mask-image: none;
+  mask-image: none;
+}

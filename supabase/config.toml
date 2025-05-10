@@ -1,0 +1,8 @@
+
+project_id = "dqvadgbidreoslivdffn"
+
+[functions.send-sponsorship-request]
+verify_jwt = false
+
+[functions.schedule-chatbot]
+verify_jwt = false
